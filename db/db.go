@@ -3,7 +3,7 @@ package db
 import (
   "database/sql"
   _ "github.com/denisenkom/go-mssqldb"
-  . "common/utils"
+  . "github.com/Nivelian/avm/utils"
 )
 
 type Connection = *sql.DB
