@@ -33,6 +33,11 @@ func Finish (conn Connection, tx Transaction, err error) {
   conn.Close()
 }
 
+func Check (conn Connection, tx Transaction) func (error, string) {
+  return func (err error, succ string) {
+           if err != nil { Finish(conn, tx, err) } else { Log(succ) }}
+}
+
 func delete (tx Transaction, table string, instance int) error {
   _, err := tx.Exec( Fmt("delete from {0} where InstanceId = {1}", table, instance) )
   return err
