@@ -40,4 +40,3 @@ type Schedule struct {
   CardNum    int
   FileId     int
 }
-
