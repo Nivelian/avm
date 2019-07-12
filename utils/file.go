@@ -12,7 +12,7 @@ func RemoteFile (url string, headers map[string]string) []byte {
   client := &http.Client{}
   req, err := http.NewRequest("GET", url, nil)
   PanicIf(err, "Error creating new request")
-  for k, v := range o {req.Header.Add(k, v)}
+  for k, v := range headers {req.Header.Add(k, v)}
   Log(req.Header)
 
   x, err := client.Do(req)
