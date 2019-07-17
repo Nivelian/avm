@@ -31,7 +31,7 @@ func Distinct (l interface{}) (res []interface{}) {
   o := map[interface{}]struct{}{}
   xs := reflect.ValueOf(l)
   for i := 0; i < xs.Len(); i++ {
-    x := xs.Index(i)
+    x := xs.Index(i).Interface()
     _, ok := o[x]
     if !ok {
       o[x] = struct{}{}
