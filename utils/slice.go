@@ -1,5 +1,7 @@
 package utils
 
+import "reflect"
+
 func Transpose (matrix [][]interface{}) [][]interface{} {
   xl := len(matrix[0])
   yl := len(matrix)
@@ -25,9 +27,11 @@ func SetFn (ss []string) func (string) bool {     // Set simulation
   }
 }
 
-func Distinct (xs []interface{}) (res []interface{}) {
+func Distinct (l interface{}) (res []interface{}) {
   o := map[interface{}]struct{}{}
-  for _, x := range xs {
+  xs := reflect.ValueOf(l)
+  for i := 0; i < xs.Len(); i++ {
+    x := xs.Index(i)
     _, ok := o[x]
     if !ok {
       o[x] = struct{}{}
