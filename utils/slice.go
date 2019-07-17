@@ -32,9 +32,9 @@ func Distinct (l interface{}) (res []interface{}) {
   xs := reflect.ValueOf(l)
   for i := 0; i < xs.Len(); i++ {
     x := xs.Index(i).Interface()
-    _, ok := o[x]
+    _, ok := o[Str(x)]
     if !ok {
-      o[x] = struct{}{}
+      o[Str(x)] = struct{}{}
       res = append(res, x)
     }
   }
