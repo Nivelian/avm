@@ -45,7 +45,7 @@ func delete (tx Transaction, table string, instance int) error {
 func ClearAll (tx Transaction, instance int) (err error) {
   for _, s := range []string{"Schedule", "RouteTracks", "StopPoints", "Routes"} {
     err = delete(tx, Fmt("[AvmGeneral].[dbo].[trby.{0}]", s), instance)
-    if (err != nil) {
+    if err != nil {
       Error( Fmt("Failed to clear {0} table", s) )
       break;
     }
@@ -85,7 +85,7 @@ func insert (tx Transaction, key string, data []interface{}) (err error) {
   defer tpl.Close()
   for _, x := range data {
     _, err = tpl.Exec(namedArgs( StructToMap(x) )...)
-    if (err != nil) {
+    if err != nil {
       Error( Fmt("Failed to insert {0} data to table", key) )
       break;
     }

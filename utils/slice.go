@@ -24,3 +24,15 @@ func SetFn (ss []string) func (string) bool {     // Set simulation
     return ok
   }
 }
+
+func Distinct (xs []interface{}) (res []interface{}) {
+  o := map[interface{}]struct{}{}
+  for _, x := range xs {
+    _, ok := o[x]
+    if !ok {
+      o[x] = struct{}{}
+      res = append(res, x)
+    }
+  }
+  return
+}
