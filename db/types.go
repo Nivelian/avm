@@ -3,6 +3,7 @@ package db
 type Route struct {
   Instance int
   RouteId  int
+  Name     string
   Type     int
 }
 

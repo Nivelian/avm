@@ -64,7 +64,7 @@ const (
 
 func prepare (table, tpl string) string {return Fmt("insert into [AvmGeneral].[dbo].[trby.{0}] values ({1})", table, tpl)}
 var TEMPLATES = map[string]string {
-  "route":    prepare("Routes",      Fmt("{0}, :Instance, :RouteId, :RouteId, :Type", ROUTE_ID)),
+  "route":    prepare("Routes",      Fmt("{0}, :Instance, :RouteId, :Name, :Type", ROUTE_ID)),
   "station":  prepare("StopPoints",  Fmt("{0}, :Instance, :StationId, :Type, :Direction, {1}, :TitleRu, :TitleBy, :TitleEn",
                                          STATION_ID, GEO_POINT)),
   "point":    prepare("RouteTracks", Fmt("{0}, {1}, :Instance, {2}, :PointId, {3}, :Direction, :Distance, :Lat, :Lng",
