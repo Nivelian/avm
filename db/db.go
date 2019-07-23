@@ -62,8 +62,7 @@ const (
   GEO_POINT      = "[geography]::[Point](:Lat, :Lng, 4326)"
 )
 
-func prepare (table, tpl string) string {Log(Fmt("insert into [AvmGeneral].[dbo].[trby.{0}] values ({1})", table, tpl))
-                                         return Fmt("insert into [AvmGeneral].[dbo].[trby.{0}] values ({1})", table, tpl)}
+func prepare (table, tpl string) string {return Fmt("insert into [AvmGeneral].[dbo].[trby.{0}] values ({1})", table, tpl)}
 var TEMPLATES = map[string]string {
   "route":    prepare("Routes",      Fmt("{0}, :Instance, :RouteId, :Name, :Type", ROUTE_ID)),
   "station":  prepare("StopPoints",  Fmt("{0}, :Instance, :StationId, :Type, :Direction, {1}, :TitleRu, :TitleBy, :TitleEn",
@@ -76,8 +75,7 @@ var TEMPLATES = map[string]string {
 
 func namedArgs (o map[string]interface{}) (res []interface{}) {
   for k, v := range o {
-    res = append(res, sql.Named(k, v))
-  }
+    res = append(res, sql.Named(k, v))}
   return
 }
 
@@ -87,7 +85,7 @@ func insert (tx Transaction, key string, data []interface{}) (err error) {
   for _, x := range data {
     _, err = tpl.Exec(namedArgs( StructToMap(x) )...)
     if err != nil {
-      Error( Fmt("Failed to insert {0} data to table", key) )
+      Error( Fmt("Failed to insert {0} to {1} table", x, key) )
       break;
     }
   }
