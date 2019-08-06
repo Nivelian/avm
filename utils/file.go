@@ -6,16 +6,17 @@ import (
   "encoding/json"
   "encoding/xml"
   "fmt"
+  "bytes"
 )
 
-func RemoteFile (url string, headers map[string]string) []byte {
+func RemoteFile (url string, headers map[string]string, body []byte) []byte {
   client := &http.Client{}
-  req, err := http.NewRequest("GET", url, nil)
+  req, err := http.NewRequest("POST", url, bytes.NewBuffer(body))
   PanicIf(err, "Error creating new request")
   for k, v := range headers {req.Header.Add(k, v)}
 
   x, err := client.Do(req)
-  PanicIf(err, "HTTP Get error")
+  PanicIf(err, "HTTP Request error")
   defer x.Body.Close()
 
   if x.StatusCode != http.StatusOK {
