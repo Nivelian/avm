@@ -29,7 +29,7 @@ func RemoteFile (url string, headers map[string]string, body []byte) []byte {
 }
 
 func LocalFile (path string) []byte {
-  res, err := ioutil.ReadFile(path)
+  res, err := ioutil.ReadFile( Fmt("data/{0}", path) )
   PanicIf(err, "Failed to read file")
   return []byte(res)
 }
