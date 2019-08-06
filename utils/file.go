@@ -6,13 +6,14 @@ import (
   "encoding/json"
   "encoding/xml"
   "fmt"
-  "bytes"
+  "strings"
 )
 
-func RemoteFile (url string, headers map[string]string, body []byte) []byte {
+func RemoteFile (url string, headers map[string]string, body map[string]interface{}) []byte {
   client := &http.Client{}
-  req, err := http.NewRequest("POST", url, bytes.NewBuffer(body))
+  req, err := http.NewRequest("POST", url, strings.NewReader( MapToUrl(body) ))
   PanicIf(err, "Error creating new request")
+  if body != nil {req.Header.Add("Content-Type", "application/x-www-form-urlencoded")}
   for k, v := range headers {req.Header.Add(k, v)}
 
   x, err := client.Do(req)

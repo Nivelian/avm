@@ -4,6 +4,7 @@ import (
   "fmt"
   "strings"
   "strconv"
+  "net/url"
 )
 
 func Str (x interface {}) string {return fmt.Sprintf("%v", x)}
@@ -48,4 +49,10 @@ func Join (sep string, xs ...interface{}) string {
     ss = append(ss, Str(x))
   }
   return strings.Join(ss, sep)
+}
+
+func MapToUrl (o map[string]interface{}) string {
+  params := url.Values{}
+  for k, v := range o {params.Add(k, Str(v))}
+  return params.Encode()
 }
