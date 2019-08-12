@@ -1,7 +1,9 @@
 package utils
 
 import (
+  "bufio"
   "fmt"
+  "os"
   "time"
 )
 
@@ -18,4 +20,16 @@ func PanicIf (x error, msg string) {
     Error(msg)
     panic(x)
   }
+}
+
+func FilePrint () (print func (...interface{}), finish func ()) {
+  file, err := os.Create("./log.txt")
+  PanicIf(err, "Error creating file")
+  writer := bufio.NewWriter(file)
+  print = func (xs ...interface{}) {fmt.Fprintln(writer, xs...)}
+  finish = func () {
+    writer.Flush()
+    file.Close()
+  }
+  return
 }
