@@ -23,4 +23,4 @@ func triangleCos (p1, p2, p3 Location) float64 {
   a, b, c := Dist(p1, p2), Dist(p2, p3), Dist(p3, p1)
   return (sqr(a)+sqr(b)-sqr(c))/(2*a*b)
 }
-func ObtuseAngle (p1, p2, p3 Location) bool {return p1 != p3 && triangleCos(p1, p2, p3) >= 0}
+func ObtuseAngle (p1, p2, p3 Location) bool {return p1 != p3 && triangleCos(p1, p2, p3) < 0}
