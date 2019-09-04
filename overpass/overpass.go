@@ -7,6 +7,7 @@ const URL = "https://lz4.overpass-api.de/api/interpreter"
 type OsmTags struct {
   Name    string
   Colour  string
+  Ref     string
 }
 type OsmMember struct {
   Type string
