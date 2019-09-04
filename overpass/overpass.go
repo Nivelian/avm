@@ -36,14 +36,14 @@ func LoadData (file string) []OsmElement {
   return res.Elements
 }
 
-func (el OsmElement) reverse () (res OsmElement) {
+func (el OsmElement) Reverse () (res OsmElement) {
   res = DeepCopy(el).(OsmElement)
   res.Elements = []OsmElement{}
   for i := len(el.Elements)-1; i >=0; i-- {res.Elements = append(res.Elements, el.Elements[i])}
   return
 }
 
-func (el OsmElement) flatten () (res OsmElement) {
+func (el OsmElement) Flatten () (res OsmElement) {
   res = DeepCopy(el).(OsmElement)
   var nodes []OsmElement
   for _, way := range el.Elements {nodes = append(nodes, way.Elements...)}
