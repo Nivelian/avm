@@ -6,8 +6,8 @@ const URL = "https://lz4.overpass-api.de/api/interpreter"
 
 type OsmTags struct {
   Name    string
-  NameEn  string `json:"name:en"`
-  NameBy  string `json:"int_name"`
+  NameEn  string `json:"int_name"`
+  NameBy  string `json:"name:be"`
   Colour  string
   Ref     string
 }
